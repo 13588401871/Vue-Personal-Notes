@@ -25,6 +25,7 @@
                         <input type="text" class="form-control" v-model="name">
                     </label> 
                     <label>
+                    <!--在vue中，使用事件绑定机制，为元素指定处理函数的时候，如果加了小括号，就可以给函数传参了-->
                     <input type="button" value="Add" class="btn btn-primary" @click="add">
                     </label>
                     <label>
@@ -84,8 +85,11 @@
                         this.id=this.name=''
                     },
                     del(id){
+                        //方法一
                         //1如歌根据id找到删除这一项的索引
                         //2直接调用数组的splice方法
+                        //every()是对数组中每一项运行给定函数，如果该函数对每一项返回true,则返回true。
+                        //some()是对数组中每一项运行给定函数，如果该函数对任一项返回true，则返回true。
                         this.list.some((item, i)=>{
                             if(item.id==id){
                                 //在数组的some方法中。如果return true，就会立即终止这个后续循环
@@ -93,6 +97,15 @@
                                 return ture;
                             }
                         })
+                        /*
+                        //方法二：通过findIndex
+                        var index = this.list.findIndex(item=>{
+                            if(item.id == id){
+                                return true;
+                            }
+                        })
+                        this.list.splice(index, 1)
+                        */
                     },
                     search(keywords){
                         var newList = []
